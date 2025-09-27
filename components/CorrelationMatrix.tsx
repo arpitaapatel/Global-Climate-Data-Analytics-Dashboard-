@@ -3,8 +3,18 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
+// Define types for correlation data
+type CorrelationData = {
+  variables: string[]
+  correlations: {
+    [key: string]: {
+      [key: string]: number
+    }
+  }
+}
+
 // Generate correlation matrix data
-const generateCorrelationData = () => {
+const generateCorrelationData = (): CorrelationData => {
   const variables = ['Temperature', 'CO₂', 'Sea Level', 'Precipitation', 'Humidity', 'Wind Speed']
   
   // Create a realistic correlation matrix
@@ -38,8 +48,8 @@ const getCorrelationStrength = (value: number) => {
 }
 
 export default function CorrelationMatrix() {
-  const [data, setData] = useState(null)
-  const [selectedVariable, setSelectedVariable] = useState(null)
+  const [data, setData] = useState<CorrelationData | null>(null)
+  const [selectedVariable, setSelectedVariable] = useState<string | null>(null)
 
   useEffect(() => {
     setData(generateCorrelationData())

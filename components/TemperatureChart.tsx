@@ -4,8 +4,17 @@ import { useState, useEffect } from 'react'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart } from 'recharts'
 import { motion } from 'framer-motion'
 
+// Define types for temperature data
+type TemperatureData = {
+  year: number
+  temperature: number
+  anomaly: number
+  co2: number
+  seaLevel: number
+}
+
 // Generate realistic temperature data
-const generateTemperatureData = () => {
+const generateTemperatureData = (): TemperatureData[] => {
   const years = Array.from({ length: 20 }, (_, i) => 2004 + i)
   return years.map(year => {
     const baseTemp = 14.5 + (year - 2004) * 0.02 // Gradual warming trend
@@ -23,14 +32,14 @@ const generateTemperatureData = () => {
 }
 
 export default function TemperatureChart() {
-  const [data, setData] = useState([])
-  const [selectedMetric, setSelectedMetric] = useState('temperature')
+  const [data, setData] = useState<TemperatureData[]>([])
+  const [selectedMetric, setSelectedMetric] = useState<string>('temperature')
 
   useEffect(() => {
     setData(generateTemperatureData())
   }, [])
 
-  const CustomTooltip = ({ active, payload, label }) => {
+  const CustomTooltip = ({ active, payload, label }: { active?: boolean; payload?: any[]; label?: string }) => {
     if (active && payload && payload.length) {
       return (
         <div className="bg-white p-4 rounded-lg shadow-lg border border-gray-200">
@@ -118,14 +127,14 @@ export default function TemperatureChart() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-gray-200">
         <div className="text-center">
           <p className="text-2xl font-bold text-gray-900">
-            {data.length > 0 ? data[data.length - 1][selectedMetric]?.toFixed(2) : '0.00'}
+            {data.length > 0 ? (data[data.length - 1] as any)[selectedMetric]?.toFixed(2) : '0.00'}
           </p>
           <p className="text-sm text-gray-600">Current Value</p>
         </div>
         <div className="text-center">
           <p className="text-2xl font-bold text-green-600">
             {data.length > 0 ? 
-              ((data[data.length - 1][selectedMetric] - data[0][selectedMetric]) / data.length).toFixed(3) 
+              (((data[data.length - 1] as any)[selectedMetric] - (data[0] as any)[selectedMetric]) / data.length).toFixed(3) 
               : '0.000'
             }
           </p>
@@ -134,7 +143,7 @@ export default function TemperatureChart() {
         <div className="text-center">
           <p className="text-2xl font-bold text-blue-600">
             {data.length > 0 ? 
-              (data[data.length - 1][selectedMetric] - data[0][selectedMetric]).toFixed(2) 
+              ((data[data.length - 1] as any)[selectedMetric] - (data[0] as any)[selectedMetric]).toFixed(2) 
               : '0.00'
             }
           </p>

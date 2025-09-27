@@ -10,11 +10,26 @@ import {
   BarChart3,
   Brain,
   Zap,
-  Shield
+  Shield,
+  LucideIcon
 } from 'lucide-react'
 
+// Define types for insights data
+type Insight = {
+  id: number
+  type: string
+  title: string
+  description: string
+  impact: string
+  confidence: number
+  icon: LucideIcon
+  color: string
+  bgColor: string
+  borderColor: string
+}
+
 // Generate insights data
-const generateInsights = () => {
+const generateInsights = (): Insight[] => {
   return [
     {
       id: 1,
@@ -114,9 +129,9 @@ const getImpactLabel = (impact: string) => {
 }
 
 export default function DataInsights() {
-  const [insights, setInsights] = useState([])
-  const [selectedInsight, setSelectedInsight] = useState(null)
-  const [filter, setFilter] = useState('all')
+  const [insights, setInsights] = useState<Insight[]>([])
+  const [selectedInsight, setSelectedInsight] = useState<Insight | null>(null)
+  const [filter, setFilter] = useState<string>('all')
 
   useEffect(() => {
     setInsights(generateInsights())

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import dynamic from 'next/dynamic'
 import { 
   Thermometer, 
   Droplets, 
@@ -19,11 +20,16 @@ import Header from '@/components/Header'
 import StatsGrid from '@/components/StatsGrid'
 import TemperatureChart from '@/components/TemperatureChart'
 import PrecipitationChart from '@/components/PrecipitationChart'
-import WorldMap from '@/components/WorldMap'
 import CorrelationMatrix from '@/components/CorrelationMatrix'
 import PredictionsPanel from '@/components/PredictionsPanel'
 import DataInsights from '@/components/DataInsights'
 import LoadingSpinner from '@/components/LoadingSpinner'
+
+// Dynamically import WorldMap with SSR disabled
+const WorldMap = dynamic(() => import('@/components/WorldMap'), {
+  ssr: false,
+  loading: () => <div className="h-80 bg-gray-100 rounded-lg flex items-center justify-center">Loading map...</div>
+})
 
 export default function Dashboard() {
   const [loading, setLoading] = useState(true)

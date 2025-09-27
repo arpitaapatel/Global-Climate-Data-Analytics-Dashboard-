@@ -5,8 +5,16 @@ import { motion } from 'framer-motion'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart } from 'recharts'
 import { AlertTriangle, TrendingUp, Calendar, Target } from 'lucide-react'
 
+// Define types for prediction data
+type PredictionData = {
+  year: number
+  temperature: number
+  confidence: number
+  scenario?: string
+}
+
 // Generate prediction data
-const generatePredictionData = () => {
+const generatePredictionData = (): PredictionData[] => {
   const historical = Array.from({ length: 10 }, (_, i) => ({
     year: 2014 + i,
     temperature: 14.2 + i * 0.15 + (Math.random() - 0.5) * 0.3,
@@ -51,9 +59,9 @@ const scenarios = [
 ]
 
 export default function PredictionsPanel() {
-  const [data, setData] = useState([])
-  const [selectedScenario, setSelectedScenario] = useState('realistic')
-  const [timeframe, setTimeframe] = useState('10')
+  const [data, setData] = useState<PredictionData[]>([])
+  const [selectedScenario, setSelectedScenario] = useState<string>('realistic')
+  const [timeframe, setTimeframe] = useState<string>('10')
 
   useEffect(() => {
     setData(generatePredictionData())
@@ -64,7 +72,7 @@ export default function PredictionsPanel() {
     return item.year >= 2024 - years
   })
 
-  const CustomTooltip = ({ active, payload, label }) => {
+  const CustomTooltip = ({ active, payload, label }: { active?: boolean; payload?: any[]; label?: string }) => {
     if (active && payload && payload.length) {
       const item = payload[0].payload
       return (

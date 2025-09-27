@@ -14,8 +14,18 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 })
 
+// Define types for climate data
+type ClimateData = {
+  name: string
+  lat: number
+  lng: number
+  temp: number
+  co2: number
+  risk: string
+}
+
 // Generate realistic climate data for different regions
-const generateClimateData = () => {
+const generateClimateData = (): ClimateData[] => {
   return [
     { name: 'North America', lat: 45.0, lng: -100.0, temp: 8.5, co2: 415, risk: 'Medium' },
     { name: 'Europe', lat: 54.0, lng: 15.0, temp: 9.2, co2: 410, risk: 'Low' },
@@ -47,16 +57,16 @@ const getTempColor = (temp: number) => {
 }
 
 export default function WorldMap() {
-  const [data, setData] = useState([])
-  const [selectedRegion, setSelectedRegion] = useState(null)
-  const [mapCenter, setMapCenter] = useState([20, 0])
-  const [zoom, setZoom] = useState(2)
+  const [data, setData] = useState<ClimateData[]>([])
+  const [selectedRegion, setSelectedRegion] = useState<ClimateData | null>(null)
+  const [mapCenter, setMapCenter] = useState<[number, number]>([20, 0])
+  const [zoom, setZoom] = useState<number>(2)
 
   useEffect(() => {
     setData(generateClimateData())
   }, [])
 
-  const handleRegionClick = (region) => {
+  const handleRegionClick = (region: ClimateData) => {
     setSelectedRegion(region)
     setMapCenter([region.lat, region.lng])
     setZoom(4)

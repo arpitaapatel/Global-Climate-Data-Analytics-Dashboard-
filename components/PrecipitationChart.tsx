@@ -4,8 +4,22 @@ import { useState, useEffect } from 'react'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
 import { motion } from 'framer-motion'
 
+// Define types for precipitation data
+type PrecipitationData = {
+  month: string
+  precipitation: number
+  temperature: number
+  humidity: number
+}
+
+type RegionalData = {
+  name: string
+  value: number
+  color: string
+}
+
 // Generate realistic precipitation data
-const generatePrecipitationData = () => {
+const generatePrecipitationData = (): PrecipitationData[] => {
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
   return months.map((month, index) => {
     const seasonalPattern = Math.sin((index - 2) * Math.PI / 6) * 20 + 50
@@ -21,7 +35,7 @@ const generatePrecipitationData = () => {
   })
 }
 
-const generateRegionalData = () => {
+const generateRegionalData = (): RegionalData[] => {
   return [
     { name: 'Tropical', value: 35, color: '#3b82f6' },
     { name: 'Temperate', value: 28, color: '#10b981' },
@@ -31,16 +45,16 @@ const generateRegionalData = () => {
 }
 
 export default function PrecipitationChart() {
-  const [data, setData] = useState([])
-  const [regionalData, setRegionalData] = useState([])
-  const [chartType, setChartType] = useState('bar')
+  const [data, setData] = useState<PrecipitationData[]>([])
+  const [regionalData, setRegionalData] = useState<RegionalData[]>([])
+  const [chartType, setChartType] = useState<string>('bar')
 
   useEffect(() => {
     setData(generatePrecipitationData())
     setRegionalData(generateRegionalData())
   }, [])
 
-  const CustomTooltip = ({ active, payload, label }) => {
+  const CustomTooltip = ({ active, payload, label }: { active?: boolean; payload?: any[]; label?: string }) => {
     if (active && payload && payload.length) {
       return (
         <div className="bg-white p-4 rounded-lg shadow-lg border border-gray-200">
@@ -60,7 +74,7 @@ export default function PrecipitationChart() {
     return null
   }
 
-  const PieTooltip = ({ active, payload }) => {
+  const PieTooltip = ({ active, payload }: { active?: boolean; payload?: any[] }) => {
     if (active && payload && payload.length) {
       return (
         <div className="bg-white p-4 rounded-lg shadow-lg border border-gray-200">
