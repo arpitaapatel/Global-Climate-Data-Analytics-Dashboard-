@@ -7,11 +7,6 @@ A comprehensive data science portfolio project showcasing advanced climate data 
 ![React](https://img.shields.io/badge/React-18.2.0-blue)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.3.3-blue)
 
-## 🚀 Live Demo
-
-**Deploy on Vercel:** [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/yourusername/climate-data-dashboard)
-
-**Deploy on Netlify:** [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/yourusername/climate-data-dashboard)
 
 ## 📊 Features
 
@@ -119,38 +114,6 @@ climate-data-dashboard/
 └── README.md             # Project documentation
 ```
 
-## 🌐 Deployment
-
-### Deploy to Vercel
-
-1. **Connect your repository to Vercel**
-2. **Configure build settings**:
-   - Build Command: `npm run build`
-   - Output Directory: `.next`
-   - Install Command: `npm install`
-
-3. **Deploy automatically** on every push to main branch
-
-### Deploy to Netlify
-
-1. **Connect your repository to Netlify**
-2. **Configure build settings**:
-   - Build Command: `npm run build`
-   - Publish Directory: `.next`
-   - Node Version: `18`
-
-3. **Deploy automatically** on every push to main branch
-
-### Manual Deployment
-
-```bash
-# Build the project
-npm run build
-
-# The build output will be in the .next directory
-# Deploy the .next directory to your hosting provider
-```
-
 ## 📊 Data Sources
 
 The dashboard uses simulated climate data that represents realistic patterns:
@@ -245,16 +208,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **UI Framework**: Tailwind CSS and Framer Motion
 - **React Ecosystem**: Next.js and React communities
 
-## 📞 Contact
-
-**Portfolio Project** - Advanced Data Science Dashboard
-
-- **GitHub**: [@yourusername](https://github.com/yourusername)
-- **LinkedIn**: [Your LinkedIn](https://linkedin.com/in/yourprofile)
-- **Email**: your.email@example.com
 
 ---
 
 **Built with ❤️ for the data science community**
 
 *This project demonstrates advanced data science skills including statistical analysis, machine learning, data visualization, and modern web development practices.*
+
