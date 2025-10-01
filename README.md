@@ -245,16 +245,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **UI Framework**: Tailwind CSS and Framer Motion
 - **React Ecosystem**: Next.js and React communities
 
-## 📞 Contact
-
-**Portfolio Project** - Advanced Data Science Dashboard
-
-- **GitHub**: [@yourusername](https://github.com/yourusername)
-- **LinkedIn**: [Your LinkedIn](https://linkedin.com/in/yourprofile)
-- **Email**: your.email@example.com
-
----
-
-**Built with ❤️ for the data science community**
 
 *This project demonstrates advanced data science skills including statistical analysis, machine learning, data visualization, and modern web development practices.*
+
